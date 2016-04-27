@@ -21,8 +21,10 @@ module "my_autoscaling_group" {
   tag_description = "example aws_sg_elb_lc_asg"
   tag_creator = "me"
   tag_product = "product"
-  tag_customer = "customer"
+  tag_customer = "${var.tag_customer}"
   tag_owner = "owner"
   tag_environment = "dev"
   tag_costcenter = "TBD"
+  emrl_products = "${var.emrl_products}"
+  emrl_package_size = "${var.emrl_package_size}"
 }
