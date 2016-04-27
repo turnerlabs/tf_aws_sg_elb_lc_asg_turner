@@ -2,9 +2,21 @@
  * Module: tf_aws_sg_elb_lc_asg
 */
 
- #
- # Security Group Variables
- #
+
+#
+# Bootstrap Variables
+#
+
+variable "emrl_products" {
+  description = "Emeril Products"
+}
+variable "emrl_package_size" {
+  description = "Emeril Asset Tags"
+}
+
+#
+# Security Group Variables
+#
 
 variable "vpc_id" {
   description = "The VPC id that all the infrastructure is applied to"
@@ -116,7 +128,7 @@ variable "vpc_zone_subnets" {
  */
 variable "termination_policy" {
   description = "A comma separated list of termination policy(ies) used to terminate instances"
-  default = "OldestLaunchConfiguration,OldestInstance"
+  default = "OldestInstance"
 }
 
 #

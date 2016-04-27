@@ -11,6 +11,13 @@
  *
  */
 
+ module "bootstrap" {
+   source       = "git::ssh://git@bitbucket.org/vgtf/argo-bootstrap-terraform.git?ref=v0.1.0"
+   products     = "${var.emrl_products}"
+   package_size = "${var.emrl_package_size}"
+   customer     = "${var.tag_customer}"
+ }
+
 resource "aws_security_group" "sg_elb" {
   name          = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-elb"
   vpc_id        = "${var.vpc_id}"
@@ -121,7 +128,7 @@ resource "aws_launch_configuration" "launch_config" {
   instance_type   = "${var.instance_type}"
   key_name        = "${var.key_name}"
   security_groups = ["${aws_security_group.sg_instance.id}"]
-  user_data       = "${file(var.user_data)}"
+  user_data       = "${module.bootstrap.user_data}"
 }
 
 resource "aws_autoscaling_group" "main_asg" {
