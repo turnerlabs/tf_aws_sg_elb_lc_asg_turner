@@ -1,7 +1,8 @@
-tf_aws_elb_sg_lc_asg
+tf_aws_elb_sg_lc_asg_turner
 ==============
 
-This is an expanded upon version of https://github.com/terraform-community-modules/tf_aws_asg_elb
+This is an expanded upon version of https://github.com/turnerlabs/tf_aws_sg_elb_lc_asg
+which was originally taken from https://github.com/terraform-community-modules/tf_aws_asg_elb
 
 This is a Terraform module for creating 2 Security Groups(ELB and Instance), an ELB, a Launch Configuration, and an Auto-Scaling Group.
 This module makes the following assumptions:
@@ -10,11 +11,17 @@ This module makes the following assumptions:
 * *You want to associate the ASG with an ELB*
 * You're instances behind the ELB will be in a VPC
 * You're using a Security Group for the ELB and a Security Group for all instances in the ASG
+* You're using the minimal tagging strategy required
+* You have jq and the aws cli installed on you machine
+
+
+You need to run this command before getting started to set the CidrBlock environment variable for the VPC.  We need this to tighten ELB traffic through to our instances:
+
+export TF_VAR_vpc_cidr_block=`aws ec2 describe-vpcs --vpc-ids vpc-<id> | jq --raw-output '.Vpcs[0].CidrBlock'`
+
 
 Input Variables
 ---------------
-
- export TF_VAR_vpc_cidr_block=`aws ec2 describe-vpcs --vpc-ids vpc-<id> | jq --raw-output '.Vpcs[0].CidrBlock'`
 
  Security Group
 
@@ -98,28 +105,32 @@ You can use these in your terraform template with the following steps.
 
 ```
 module "my_autoscaling_group" {
-  source = "github.com/smithatlanta/tf_aws_sg_elb_lc_asg"
+  source = "github.com/turnerlabs/tf_aws_sg_elb_lc_asg_turner"
 
-  sg_elb_name = "${var.sg_elb_name}"
-  sg_instance_name = "${var.sg_instance_name}"
   vpc_id = "${var.vpc_id}"
 
-  elb_name = "${var.elb_name}"
   elb_listener_lb_port = "${var.elb_listener_lb_port}"
   elb_listener_instance_port = "${var.elb_listener_instance_port}"
   elb_health_check_target = "${var.elb_health_check_target}"
 
-  lc_name = "${var.lc_name}"
   user_data = "${var.user_data_file}"
   ami_id = "${var.ami_id}"
   instance_type = "${var.instance_type}"
   key_name = "${var.key_name}"
 
-  asg_name = "${var.asg_name}"
   asg_number_of_instances = "${var.asg_number_of_instances}"
   availability_zones = "${var.availability_zones}"
   vpc_zone_subnets = "${var.vpc_zone_subnets}"
-  instance_name = "${var.instance_name}"
+  vpc_cidr_block = "${var.vpc_cidr_block}"
+
+  tag_name = "example"
+  tag_description = "example aws_sg_elb_lc_asg"
+  tag_creator = "me"
+  tag_product = "product"
+  tag_customer = "customer"
+  tag_owner = "owner"
+  tag_environment = "dev"
+  tag_costcenter = "TBD"
 }
 
 ```
@@ -129,23 +140,26 @@ module "my_autoscaling_group" {
 - aws_access_key
 - aws_secret_key
 - aws_region
-- sg_elb_name
-- sg_instance_name
 - vpc_id
-- elb_name
 - elb_listener_lb_port
 - elb_listener_instance_port
 - elb_health_check_target
-- lc_name
 - user_data
 - ami_id
 - instance_type
 - key_name
-- asg_name
 - asg_number_of_instances
 - availability_zones
 - vpc_zone_subnets
-- instance_name
+- tag_name
+- tag_description
+- tag_creator
+- tag_product
+- tag_customer
+- tag_owner
+- tag_environment
+- tag_costcenter
+
 
 Authors
 =======
