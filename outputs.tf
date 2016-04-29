@@ -18,3 +18,8 @@ output "launch_config_id" {
 output "asg_id" {
     value = "${aws_autoscaling_group.main_asg.id}"
 }
+
+# Output the Name of the Auto Scale Group
+output "asg_name" {
+    value = "${aws_autoscaling_group.main_asg.name}"
+}
