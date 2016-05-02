@@ -96,6 +96,8 @@ Outputs
 
 - `asg_id`
 
+- `asg_name`
+
 Usage
 -----
 
