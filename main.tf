@@ -92,9 +92,8 @@ resource "aws_security_group" "sg_instance" {
 resource "aws_elb" "elb" {
   depends_on          = ["aws_security_group.sg_elb"]
   name                = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf"
-  availability_zones  = ["${split(",", var.availability_zones)}"]
   security_groups     = ["${aws_security_group.sg_elb.id}"]
-  subnets             = ["${split(",", var.vpc_zone_subnets)}"]  
+  subnets             = ["${split(",", var.vpc_zone_subnets)}"]
 
   listener {
     instance_port     = "${var.elb_listener_instance_port}"
