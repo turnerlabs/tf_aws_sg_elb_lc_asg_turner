@@ -21,7 +21,6 @@
 resource "aws_security_group" "sg_elb" {
   name          = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-elb"
   vpc_id        = "${var.vpc_id}"
-  internal      = "${var.elb_internal_bool}"
 
   # inbound HTTP access from anywhere
   ingress {
@@ -95,6 +94,7 @@ resource "aws_elb" "elb" {
   name                = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf"
   security_groups     = ["${aws_security_group.sg_elb.id}"]
   subnets             = ["${split(",", var.vpc_zone_subnets)}"]
+  internal      = "${var.elb_internal_bool}"
 
   listener {
     instance_port     = "${var.elb_listener_instance_port}"

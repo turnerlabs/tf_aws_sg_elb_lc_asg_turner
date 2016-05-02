@@ -38,7 +38,7 @@ variable "elb_listener_instance_port" {
 }
 variable "elb_health_check_healthy_threshold" {
   description = "The number of checks before the instance is declared healthy"
-  default = "10"
+  default = "2"
 }
 variable "elb_health_check_unhealthy_threshold" {
   description = "The number of checks before the instance is declared unhealthy"
@@ -46,7 +46,7 @@ variable "elb_health_check_unhealthy_threshold" {
 }
 variable "elb_health_check_timeout" {
   description = "The length of time before the check times out"
-  default = "5"
+  default = "3"
 }
 variable "elb_health_check_target" {
   description = "The target of the heath check. usually something like HTTP:<instance_port>/healthcheck"
