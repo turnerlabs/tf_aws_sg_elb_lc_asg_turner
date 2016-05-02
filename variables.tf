@@ -103,7 +103,7 @@ variable "health_check_grace_period" {
  */
 variable "health_check_type" {
   description = "The health check used by the ASG to determine health"
-  default = "ELB"
+  default = "EC2"
 }
 
 /*
