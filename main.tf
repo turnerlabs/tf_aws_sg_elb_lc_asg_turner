@@ -21,6 +21,7 @@
 resource "aws_security_group" "sg_elb" {
   name          = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-elb"
   vpc_id        = "${var.vpc_id}"
+  internal      = "${var.elb_internal_bool}"
 
   # inbound HTTP access from anywhere
   ingress {

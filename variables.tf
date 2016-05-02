@@ -55,6 +55,10 @@ variable "elb_health_check_interval" {
   description = "The interval between health checks"
   default = "30"
 }
+variable "elb_internal_bool" {
+  description = "If the ELB is going to be internal or not"
+  default = "true"
+}
 
 #
 # Launch Configuration Variables
