@@ -2,12 +2,22 @@
  * Module: tf_aws_sg_elb_lc_asg
  *
  * Outputs:
- *    - sg_instance_id
- *    - sg_elb_id
-*     - elb_id
+ *    - elb_id
+ *    - elb_name
  *    - launch_config_id
  *    - asg_id
+ *    - asg_name
  */
+
+# Output the ID of the ELB
+output "elb_name" {
+    value = "${aws_elb.elb.name}"
+}
+
+# Output the Name of the ELB
+output "elb_name" {
+    value = "${aws_elb.elb.id}"
+}
 
 # Output the ID of the Launch Config
 output "launch_config_id" {
