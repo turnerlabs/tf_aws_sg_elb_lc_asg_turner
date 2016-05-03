@@ -15,7 +15,7 @@ output "elb_name" {
 }
 
 # Output the Name of the ELB
-output "elb_name" {
+output "elb_id" {
     value = "${aws_elb.elb.id}"
 }
 
