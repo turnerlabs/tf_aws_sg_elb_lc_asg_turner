@@ -180,8 +180,8 @@ resource "aws_autoscaling_group" "main_asg" {
     propagate_at_launch = true
   }
   tag {
-    key   = "Owner"
-    value = "${var.tag_owner}"
+    key   = "Team"
+    value = "${var.tag_team}"
     propagate_at_launch = true
   }
   tag {
@@ -190,8 +190,8 @@ resource "aws_autoscaling_group" "main_asg" {
     propagate_at_launch = true
   }
   tag {
-    key   = "Costcenter"
-    value = "${var.tag_costcenter}"
+    key   = "Billing"
+    value = "${var.tag_billing}"
     propagate_at_launch = true
   }
 }
