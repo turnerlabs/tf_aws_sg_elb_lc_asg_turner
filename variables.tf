@@ -154,12 +154,12 @@ variable "tag_product" {
 variable "tag_customer" {
   description = ""
 }
-variable "tag_owner" {
+variable "tag_team" {
   description = ""
 }
 variable "tag_environment" {
   description = ""
 }
-variable "tag_costcenter" {
+variable "tag_billing" {
   description = ""
 }
