@@ -119,10 +119,21 @@ variable "availability_zones" {
 }
 
 /*
- * A string list of VPC subnet IDs, ex:
+ * A string list of VPC subnet IDs for the instances, ex:
  * "subnet-d2t4sad,subnet-434ladkn"
  */
-variable "vpc_zone_subnets" {
+variable "vpc_zone_instance_subnets" {
+  description = "A comma seperated list string of VPC subnets to associate with ASG, should correspond with var.availability_zones zones"
+}
+
+/*
+ * A string list of VPC subnet IDs for the elbs, ex:
+ * "subnet-x2t4sad,subnet-x34ladkn"
+ *
+ * These subnets need to be in the same AZs as the ones chosen for the instances, or else the ELBs will not be able to communicate with 
+ * the instances themselves.
+ */
+variable "vpc_zone_elbs_subnets" {
   description = "A comma seperated list string of VPC subnets to associate with ASG, should correspond with var.availability_zones zones"
 }
 

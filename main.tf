@@ -93,7 +93,7 @@ resource "aws_elb" "elb" {
   depends_on          = ["aws_security_group.sg_elb"]
   name                = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf"
   security_groups     = ["${aws_security_group.sg_elb.id}"]
-  subnets             = ["${split(",", var.vpc_zone_subnets)}"]
+  subnets             = ["${split(",", var.vpc_zone_elb_subnets)}"]
   internal      = "${var.elb_internal_bool}"
 
   listener {
@@ -139,7 +139,7 @@ resource "aws_autoscaling_group" "main_asg" {
 
   # The chosen availability zones *must* match the AZs the VPC subnets are tied to.
   availability_zones    = ["${split(",", var.availability_zones)}"]
-  vpc_zone_identifier   = ["${split(",", var.vpc_zone_subnets)}"]
+  vpc_zone_identifier   = ["${split(",", var.vpc_zone_instance_subnets)}"]
 
   # Uses the ID from the launch config created above
   launch_configuration  = "${aws_launch_configuration.launch_config.id}"
