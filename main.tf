@@ -94,7 +94,7 @@ resource "aws_elb" "elb" {
   name                = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf"
   security_groups     = ["${aws_security_group.sg_elb.id}"]
   subnets             = ["${split(",", var.vpc_zone_elb_subnets)}"]
-  internal      = "${var.elb_internal_bool}"
+  internal            = "${var.elb_internal_bool}"
 
   listener {
     instance_port     = "${var.elb_listener_instance_port}"
@@ -123,13 +123,14 @@ resource "aws_elb" "elb" {
 }
 
 resource "aws_launch_configuration" "launch_config" {
-  depends_on      = ["aws_security_group.sg_instance"]
-  name_prefix     = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-"
-  image_id        = "${var.ami_id}"
-  instance_type   = "${var.instance_type}"
-  key_name        = "${var.key_name}"
-  security_groups = ["${aws_security_group.sg_instance.id}"]
-  user_data       = "${module.bootstrap.user_data}"
+  depends_on                  = ["aws_security_group.sg_instance"]
+  name_prefix                 = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-"
+  image_id                    = "${var.ami_id}"
+  instance_type               = "${var.instance_type}"
+  key_name                    = "${var.key_name}"
+  security_groups             = ["${aws_security_group.sg_instance.id}"]
+  user_data                   = "${module.bootstrap.user_data}"
+  associate_public_ip_address = "${var.associate_public_ip_address}"  
 }
 
 resource "aws_autoscaling_group" "main_asg" {
