@@ -82,7 +82,9 @@ Input Variables
 
 - `availability_zones` - A comma separated list of availability zones (AZs) for the ASG. `ex. "us-east-1a,us-east-1c"`
 
-- `vpc_zone_subnets` - A comma seperated list of VPC subnets to associate with ASG, should correspond with var.availability_zones zones.  `ex. "subnet-d2t4sad,subnet-434ladkn"`
+- `vpc_zone_instance_subnets` - A comma seperated list of VPC subnets to associate with ASG, should correspond with var.availability_zones zones.  `ex. "subnet-d2t4sad,subnet-434ladkn"`
+
+- `vpc_zone_elb_subnets` - A comma seperated list of VPC subnets to associate with ASG, should correspond with var.availability_zones zones.  `ex. "subnet-xxx4sad,subnet-xxladkn"`
 
 - `termination_policy` - A comma separated list of termination policies used to terminate instances.  `The default is "OldestLaunchConfiguration,OldestInstance"`
 
@@ -122,7 +124,8 @@ module "my_autoscaling_group" {
 
   asg_number_of_instances = "${var.asg_number_of_instances}"
   availability_zones = "${var.availability_zones}"
-  vpc_zone_subnets = "${var.vpc_zone_subnets}"
+  vpc_zone_instance_subnets = "${var.vpc_zone_instance_subnets}"
+  vpc_zone_elb_subnets = "${var.vpc_zone_elb_subnets}"
   vpc_cidr_block = "${var.vpc_cidr_block}"
 
   tag_name = "example"
@@ -152,7 +155,8 @@ module "my_autoscaling_group" {
 - key_name
 - asg_number_of_instances
 - availability_zones
-- vpc_zone_subnets
+- vpc_zone_instance_subnets
+- vpc_zone_elb_subnets
 - tag_name
 - tag_description
 - tag_creator
