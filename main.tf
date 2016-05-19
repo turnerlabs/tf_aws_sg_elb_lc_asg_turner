@@ -44,9 +44,9 @@ resource "aws_security_group" "sg_elb" {
     Environment = "${var.tag_environment}"
     Creator     = "${var.tag_creator}"
     Customer    = "${var.tag_customer}"
-    Team       = "${var.tag_team}"
+    Team        = "${var.tag_team}"
     Product     = "${var.tag_product}"
-    Billing  = "${var.tag_billing}"
+    Billing     = "${var.tag_billing}"
   }
  }
 
@@ -116,9 +116,9 @@ resource "aws_elb" "elb" {
     Environment     = "${var.tag_environment}"
     Creator         = "${var.tag_creator}"
     Customer        = "${var.tag_customer}"
-    Team           = "${var.tag_team}"
+    Team            = "${var.tag_team}"
     Product         = "${var.tag_product}"
-    Billing      = "${var.tag_billing}"
+    Billing         = "${var.tag_billing}"
   }
 }
 
