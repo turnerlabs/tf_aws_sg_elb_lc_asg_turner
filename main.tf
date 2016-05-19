@@ -19,7 +19,7 @@
  }
 
 resource "aws_security_group" "sg_elb" {
-  name          = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-elb"
+  name          = "${var.tag_product}-${var.tag_environment}-tf-elb"
   vpc_id        = "${var.vpc_id}"
 
   # inbound HTTP access from anywhere
@@ -39,7 +39,7 @@ resource "aws_security_group" "sg_elb" {
   }
 
   tags {
-    Name        = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-elb"
+    Name        = "${var.tag_product}-${var.tag_environment}-tf-elb"
     Description = "${var.tag_description}"
     Environment = "${var.tag_environment}"
     Creator     = "${var.tag_creator}"
@@ -51,7 +51,7 @@ resource "aws_security_group" "sg_elb" {
  }
 
 resource "aws_security_group" "sg_instance" {
-  name          = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-instance"
+  name          = "${var.tag_product}-${var.tag_environment}-tf-instance"
   vpc_id        = "${var.vpc_id}"
 
   # SSH access from anywhere
@@ -78,7 +78,7 @@ resource "aws_security_group" "sg_instance" {
   }
 
   tags {
-    Name        = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-instance"
+    Name        = "${var.tag_product}-${var.tag_environment}-tf-instance"
     Description = "${var.tag_description}"
     Environment = "${var.tag_environment}"
     Creator     = "${var.tag_creator}"
@@ -91,7 +91,7 @@ resource "aws_security_group" "sg_instance" {
 
 resource "aws_elb" "elb" {
   depends_on          = ["aws_security_group.sg_elb"]
-  name                = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf"
+  name                = ${var.tag_product}-${var.tag_environment}-tf"
   security_groups     = ["${aws_security_group.sg_elb.id}"]
   subnets             = ["${split(",", var.vpc_zone_elb_subnets)}"]
   internal            = "${var.elb_internal_bool}"
@@ -124,7 +124,7 @@ resource "aws_elb" "elb" {
 
 resource "aws_launch_configuration" "launch_config" {
   depends_on                  = ["aws_security_group.sg_instance"]
-  name_prefix                 = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf-"
+  name_prefix                 = "${var.tag_product}-${var.tag_environment}-tf-"
   image_id                    = "${var.ami_id}"
   instance_type               = "${var.instance_type}"
   key_name                    = "${var.key_name}"
@@ -136,7 +136,7 @@ resource "aws_launch_configuration" "launch_config" {
 resource "aws_autoscaling_group" "main_asg" {
   # We want this to explicitly depend on the launch config above
   depends_on            = ["aws_launch_configuration.launch_config", "aws_elb.elb"]
-  name                  = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}-tf"
+  name                  = "${var.tag_product}-${var.tag_environment}-tf"
 
   # The chosen availability zones *must* match the AZs the VPC subnets are tied to.
   availability_zones    = ["${split(",", var.availability_zones)}"]
@@ -157,7 +157,7 @@ resource "aws_autoscaling_group" "main_asg" {
 
   tag {
     key = "Name"
-    value = "${var.tag_customer}-${var.tag_product}-${var.tag_environment}"
+    value = "${var.tag_product}-${var.tag_environment}"
     propagate_at_launch = true
   }
   tag {
