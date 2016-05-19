@@ -50,6 +50,7 @@ Input Variables
 
 - `elb_health_check_interval` - The interval between health checks. `The default is 30.`
 
+- `elb_internal_bool` - If the ELB is going to be internal or not. `The default is true.`
 
 
  Launch Configuration
@@ -63,6 +64,8 @@ Input Variables
 - `key_name` - The SSH key name (uploaded to EC2) instances should be populated with.
 
 - `user_data` - The path to the user_data file for the Launch Configuration.  Terraform will include the contents of this file in the Launch Configuration.
+
+- `associate_public_ip_address` - This allows an instance to be externally accessible. `The default is false`
 
 
  Auto Scale Groups
