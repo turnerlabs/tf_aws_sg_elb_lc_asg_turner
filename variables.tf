@@ -134,10 +134,10 @@ variable "vpc_zone_instance_subnets" {
  * A string list of VPC subnet IDs for the elbs, ex:
  * "subnet-x2t4sad,subnet-x34ladkn"
  *
- * These subnets need to be in the same AZs as the ones chosen for the instances, or else the ELBs will not be able to communicate with 
+ * These subnets need to be in the same AZs as the ones chosen for the instances, or else the ELBs will not be able to communicate with
  * the instances themselves.
  */
-variable "vpc_zone_elbs_subnets" {
+variable "vpc_zone_elb_subnets" {
   description = "A comma seperated list string of VPC subnets to associate with ASG, should correspond with var.availability_zones zones"
 }
 
