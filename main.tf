@@ -91,7 +91,7 @@ resource "aws_security_group" "sg_instance" {
 
 resource "aws_elb" "elb" {
   depends_on          = ["aws_security_group.sg_elb"]
-  name                = ${var.tag_product}-${var.tag_environment}-tf"
+  name                = "${var.tag_product}-${var.tag_environment}-tf"
   security_groups     = ["${aws_security_group.sg_elb.id}"]
   subnets             = ["${split(",", var.vpc_zone_elb_subnets)}"]
   internal            = "${var.elb_internal_bool}"
