@@ -157,10 +157,7 @@ variable "termination_policy" {
 variable "tag_name" {
   description = ""
 }
-variable "tag_description" {
-  description = ""
-}
-variable "tag_creator" {
+variable "tag_application" {
   description = ""
 }
 variable "tag_product" {
@@ -175,6 +172,6 @@ variable "tag_team" {
 variable "tag_environment" {
   description = ""
 }
-variable "tag_billing" {
+variable "tag_contact_email" {
   description = ""
 }

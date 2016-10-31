@@ -132,13 +132,11 @@ module "my_autoscaling_group" {
   vpc_cidr_block = "${var.vpc_cidr_block}"
 
   tag_name = "example"
-  tag_description = "example aws_sg_elb_lc_asg"
-  tag_creator = "me"
+  tag_application = "example-app"
   tag_product = "product"
   tag_customer = "customer"
-  tag_owner = "owner"
   tag_environment = "dev"
-  tag_costcenter = "TBD"
+  tag_contact_email = "dev"
 }
 
 ```
@@ -161,13 +159,11 @@ module "my_autoscaling_group" {
 - vpc_zone_instance_subnets
 - vpc_zone_elb_subnets
 - tag_name
-- tag_description
-- tag_creator
+- tag_application
 - tag_product
 - tag_customer
-- tag_owner
 - tag_environment
-- tag_costcenter
+- tag_contact_email
 
 
 Authors

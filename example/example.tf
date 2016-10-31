@@ -18,13 +18,11 @@ module "my_autoscaling_group" {
   vpc_cidr_block = "${var.vpc_cidr_block}"
 
   tag_name = "example"
-  tag_description = "example aws_sg_elb_lc_asg"
-  tag_creator = "me"
+  tag_application = "test-app"
   tag_product = "product"
   tag_customer = "${var.tag_customer}"
-  tag_owner = "owner"
   tag_environment = "dev"
-  tag_costcenter = "TBD"
+  tag_contact_email = "TBD"
   emrl_products = "${var.emrl_products}"
   emrl_package_size = "${var.emrl_package_size}"
 }

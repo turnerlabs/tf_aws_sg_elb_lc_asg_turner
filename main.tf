@@ -40,13 +40,12 @@ resource "aws_security_group" "sg_elb" {
 
   tags {
     Name        = "${var.tag_product}-${var.tag_environment}-tf-elb"
-    Description = "${var.tag_description}"
-    Environment = "${var.tag_environment}"
-    Creator     = "${var.tag_creator}"
-    Customer    = "${var.tag_customer}"
-    Team        = "${var.tag_team}"
-    Product     = "${var.tag_product}"
-    Billing     = "${var.tag_billing}"
+    environment = "${var.tag_environment}"
+    application = "${var.tag_application}"
+    customer    = "${var.tag_customer}"
+    team        = "${var.tag_team}"
+    product     = "${var.tag_product}"
+    "contact-email" = "${var.tag_contact_email}"
   }
  }
 
@@ -79,13 +78,12 @@ resource "aws_security_group" "sg_instance" {
 
   tags {
     Name        = "${var.tag_product}-${var.tag_environment}-tf-instance"
-    Description = "${var.tag_description}"
-    Environment = "${var.tag_environment}"
-    Creator     = "${var.tag_creator}"
-    Customer    = "${var.tag_customer}"
-    Team        = "${var.tag_team}"
-    Product     = "${var.tag_product}"
-    Billing     = "${var.tag_billing}"
+    environment = "${var.tag_environment}"
+    application = "${var.tag_application}"
+    customer    = "${var.tag_customer}"
+    team        = "${var.tag_team}"
+    product     = "${var.tag_product}"
+    "contact-email" = "${var.tag_contact_email}"
   }
  }
 
@@ -112,13 +110,12 @@ resource "aws_elb" "elb" {
 
   tags {
     Name            = "${var.tag_name}"
-    Description     = "${var.tag_description}"
-    Environment     = "${var.tag_environment}"
-    Creator         = "${var.tag_creator}"
-    Customer        = "${var.tag_customer}"
-    Team            = "${var.tag_team}"
-    Product         = "${var.tag_product}"
-    Billing         = "${var.tag_billing}"
+    environment     = "${var.tag_environment}"
+    application     = "${var.tag_application}"
+    customer        = "${var.tag_customer}"
+    team            = "${var.tag_team}"
+    product         = "${var.tag_product}"
+    contact_email   = "${var.tag_contact_email}"
   }
 }
 
@@ -161,38 +158,33 @@ resource "aws_autoscaling_group" "main_asg" {
     propagate_at_launch = true
   }
   tag {
-    key   = "Description"
-    value = "${var.tag_description}"
-    propagate_at_launch = true
-  }
-  tag {
-    key   = "Environment"
+    key   = "environment"
     value = "${var.tag_environment}"
     propagate_at_launch = true
   }
   tag {
-    key   = "Creator"
-    value = "${var.tag_creator}"
+    key   = "application"
+    value = "${var.tag_application}"
     propagate_at_launch = true
   }
   tag {
-    key   = "Customer"
+    key   = "customer"
     value = "${var.tag_customer}"
     propagate_at_launch = true
   }
   tag {
-    key   = "Team"
+    key   = "team"
     value = "${var.tag_team}"
     propagate_at_launch = true
   }
   tag {
-    key   = "Product"
+    key   = "product"
     value = "${var.tag_product}"
     propagate_at_launch = true
   }
   tag {
-    key   = "Billing"
-    value = "${var.tag_billing}"
+    key   = "contact-email"
+    value = "${var.tag_contact_email}"
     propagate_at_launch = true
   }
 }
